@@ -8,15 +8,23 @@ import java.time.format.DateTimeFormatter;
 
 public class BMI_Calculator {
 
+    static String name;
+    static float bmi;
+    static double bmi_rounded;
+    static String classification = bmi_classification(bmi_rounded);
+
     public static void main(String[] args) {
-        intro(); //run intro
-/////////////////////////////////////////////////NAME QUESTIONNAIRE////////////////////////////////////////////////////////
+        intro();
+        questionnaire();
+        summary();
+        outro();
+    }
+    //USER QUESTIONS
+    public static void questionnaire() {
         Scanner input = new Scanner(System.in);
         System.out.print("Please enter your full name: ");
-        String name = input.nextLine();
-/////////////////////////////////////////////////NAME QUESTIONNAIRE////////////////////////////////////////////////////////
+        name = input.nextLine();
 
-/////////////////////////////////////////////////HEIGHT QUESTIONNAIRE////////////////////////////////////////////////////////
         int height_feet = 0;
         int height_inches = 0;
         boolean valid_height = false;
@@ -28,12 +36,9 @@ public class BMI_Calculator {
                 valid_height = true;
             } catch (InputMismatchException e) {
                 System.out.println("Please enter a valid number");
-                input.next();
+                input.nextLine();
             }
         }
-/////////////////////////////////////////////////HEIGHT QUESTIONNAIRE////////////////////////////////////////////////////////
-
-/////////////////////////////////////////////////WEIGHT QUESTIONNAIRE////////////////////////////////////////////////////////
         int weight = 0;
         boolean valid_weight = false;
         while (!valid_weight) {
@@ -46,36 +51,44 @@ public class BMI_Calculator {
                 input.next();
             }
         }
-/////////////////////////////////////////////////WEIGHT QUESTIONNAIRE////////////////////////////////////////////////////////
-
-        float bmi = bmi_calculator(height_feet, height_inches, weight);
-        double bmi_rounded = rounding_calculator(bmi);
-
-        summary(name, bmi_rounded, bmi);//run summary
-        outro(name);//run outro
+        bmi = bmi_calculator(height_feet, height_inches, weight);
+        bmi_rounded = bmi_rounding(bmi);
     }
-//SUMMARY TEXT//
-    public static void summary(String name, double bmi_rounded, float bmi) {
+    //SUMMARY TEXT//
+    public static void summary () {
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM dd, yyyy 'at' hh:mm:ss a");
         String dateTime = now.format(formatter);
         System.out.println("\n-- SUMMARY REPORT FOR " + name);
         System.out.println("-- Date and Time: " + dateTime);
         System.out.println("-- BMI: " + bmi + " (or " + bmi_rounded +" if rounded)");
+        System.out.println("-- Weight Status: " + classification);
     }
     //BMI CALCULATION//
     public static float bmi_calculator(int height_feet, int height_inches, int weight) {
         int total_height_inches = (height_feet * 12) + height_inches;
-        float bmi = (weight * 703.0f) / (total_height_inches * total_height_inches);
+        bmi = (weight * 703.0f) / (total_height_inches * total_height_inches);
         return bmi;
     }
     //ROUNDING CALCULATION//
-    public static double rounding_calculator(float bmi) {
-        double rounded_bmi = Math.round(bmi * 10.0) / 10.0;
-        return rounded_bmi;
+    public static double bmi_rounding(float bmi) {
+        return bmi_rounded = Math.round(bmi * 10.0) / 10.0;
     }
 
-//INTRO TEXT//
+    public static String bmi_classification(double bmi_rounded) {
+        if (bmi_rounded <= 18.5) {
+            classification = "Underweight";
+        } else if (bmi_rounded <= 24.9) {
+            classification = "Healthy Weight";
+        } else if (bmi_rounded <= 29.9) {
+            classification = "Overweight";
+        }else {
+            classification = "Obesity";
+        }
+        return classification;
+    }
+
+    //INTRO TEXT//
     public static void intro() {
         System.out.println("-----------------------------------------------------------------------------------------------");
         System.out.println("-- Welcome to:");
@@ -83,12 +96,13 @@ public class BMI_Calculator {
         System.out.println("--                                                                    by William Lu");
         System.out.println("-----------------------------------------------------------------------------------------------");
     }
-//OUTRO TEXT//
-    public static void outro(String name) {
+    //OUTRO TEXT//
+    public static void outro() {
         System.out.println("-----------------------------------------------------------------------------------------------");
         System.out.println("-- Thank you for using my program, "+ name +"!");
         System.out.println("-- Ear-esistible!!!");
         System.out.println("-----------------------------------------------------------------------------------------------");
     }
 }
+
 
