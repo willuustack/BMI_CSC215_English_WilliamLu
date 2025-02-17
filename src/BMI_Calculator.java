@@ -11,16 +11,17 @@ public class BMI_Calculator {
     public static void main(String[] args) {
         intro(); //run intro
 
+/////////////////////////////////////////////////NAME QUESTIONNAIRE////////////////////////////////////////////////////////
         Scanner input = new Scanner(System.in);
-        boolean height_given = false;
-
         System.out.print("Please enter your full name: ");
         String name = input.nextLine();
+/////////////////////////////////////////////////NAME QUESTIONNAIRE////////////////////////////////////////////////////////
 
+
+/////////////////////////////////////////////////HEIGHT QUESTIONNAIRE////////////////////////////////////////////////////////
         int height_feet = 0;
         int height_inches = 0;
         boolean valid_height = false;
-
         while (!valid_height) {
             System.out.print("Please enter Height in feet and inches for " + name + ":");
             try {
@@ -32,7 +33,8 @@ public class BMI_Calculator {
                 input.next();
             }
         }
-
+/////////////////////////////////////////////////HEIGHT QUESTIONNAIRE////////////////////////////////////////////////////////
+/////////////////////////////////////////////////WEIGHT QUESTIONNAIRE////////////////////////////////////////////////////////
         int weight = 0;
         boolean valid_weight = false;
         while (!valid_weight) {
@@ -45,14 +47,10 @@ public class BMI_Calculator {
                 input.next();
             }
         }
-
-
+/////////////////////////////////////////////////WEIGHT QUESTIONNAIRE////////////////////////////////////////////////////////
         summary(name);//run summary
-        outro(name); //run outro
-
-        System.out.println("Your weight is: " + weight);
-        System.out.println("Your height is: " + height_feet + " " + height_inches);
-
+        outro(name);//run outro
+        bmi_calculator(height_feet, height_inches, weight);
     }
 
     public static void summary(String name) {
@@ -61,10 +59,13 @@ public class BMI_Calculator {
         String dateTime = now.format(formatter);
         System.out.println("\n-- SUMMARY REPORT FOR " + name);
         System.out.println("-- Date and Time: " + dateTime);
-
-
     }
 
+    public static void bmi_calculator(int height_feet, int height_inches, int weight) {
+        int total_height_inches = (height_feet * 12) + height_inches;
+        float bmi = (weight / (total_height_inches * total_height_inches)) * 703;
+        System.out.println("BMI: " + bmi);
+    }
 
     public static void intro() {
         System.out.println("-----------------------------------------------------------------------------------------------");
