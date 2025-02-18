@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2efad6b3-f4f6-4871-85a7-8a217638e39a" name="Changes" comment="updated bmi and rounded bmi">
+    <list default="true" id="2efad6b3-f4f6-4871-85a7-8a217638e39a" name="Changes" comment="split up main functionalities">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BMI_Calculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BMI_Calculator.java" afterDir="false" />
     </list>
@@ -69,7 +69,7 @@
       <option name="presentableId" value="Default" />
       <updated>1739758700228</updated>
       <workItem from="1739758701380" duration="9299000" />
-      <workItem from="1739818752506" duration="7332000" />
+      <workItem from="1739818752506" duration="17796000" />
     </task>
     <task id="LOCAL-00001" summary="v1">
       <option name="closed" value="true" />
@@ -87,7 +87,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739821093503</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="split up main functionalities">
+      <option name="closed" value="true" />
+      <created>1739826213948</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1739826213948</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -96,6 +104,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="v1" />
     <MESSAGE value="updated bmi and rounded bmi" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated bmi and rounded bmi" />
+    <MESSAGE value="split up main functionalities" />
+    <option name="LAST_COMMIT_MESSAGE" value="split up main functionalities" />
   </component>
 </project>
