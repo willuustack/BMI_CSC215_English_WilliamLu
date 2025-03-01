@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2efad6b3-f4f6-4871-85a7-8a217638e39a" name="Changes" comment="update 2/28">
+    <list default="true" id="2efad6b3-f4f6-4871-85a7-8a217638e39a" name="Changes" comment="update 3/1">
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BMI_CSC215_English_WilliamLu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BMI_CSC215_English_WilliamLu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BMI_CSC215_Metric_WilliamLu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BMI_CSC215_Metric_WilliamLu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BMI_CSC215_English_WilliamLu.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment_03_WilliamLu.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,6 +71,21 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="Assignment_03_WilliamLu" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="Assignment_03_WilliamLu" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -97,7 +112,7 @@
       <workItem from="1740719172574" duration="982000" />
       <workItem from="1740720175713" duration="19552000" />
       <workItem from="1740806896042" duration="3536000" />
-      <workItem from="1740859043862" duration="5992000" />
+      <workItem from="1740859043862" duration="6295000" />
     </task>
     <task id="LOCAL-00001" summary="v1">
       <option name="closed" value="true" />
@@ -147,7 +162,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740808960490</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="update 3/1">
+      <option name="closed" value="true" />
+      <created>1740865228077</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1740865228078</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -159,7 +182,8 @@
     <MESSAGE value="split up main functionalities" />
     <MESSAGE value="update 2/18" />
     <MESSAGE value="update 2/28" />
-    <option name="LAST_COMMIT_MESSAGE" value="update 2/28" />
+    <MESSAGE value="update 3/1" />
+    <option name="LAST_COMMIT_MESSAGE" value="update 3/1" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
