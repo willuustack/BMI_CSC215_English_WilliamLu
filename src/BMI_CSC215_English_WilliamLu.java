@@ -119,17 +119,19 @@ public class BMI_CSC215_English_WilliamLu {
 
     //RANGE TABLE//
     public static void range_table() {
-        System.out.println("--------------------------------------------------");
-        System.out.printf("| %-10s | %-10s | %-20s |\n", "WEIGHT", "BMI", "WEIGHT STATUS");
-        System.out.println("--------------------------------------------------");
+        String YELLOW_BACKGROUND_BLACK_TEXT = "\u001B[48;5;11m\u001B[30m";
+        String TEXT_RESET = "\u001b[0m";
+        System.out.println("----------------------------------------------------");
+        System.out.printf("| %-10s | %-10s | %-22s |\n", "WEIGHT", "BMI", "WEIGHT STATUS");
+        System.out.println("----------------------------------------------------");
         DecimalFormat bmi_format = new DecimalFormat("#.#####");
-        float step = 5.00f;
-        int status_cell_width = 20;
+        float increment = 5.00f;
+        int status_cell_width = 22;
         boolean first_row = true;
         boolean user_printed = false;
         float prev = low_weight;
-        for (float w = low_weight; w <= high_weight + 0.0001f; w += step) {
-            if (w + step > high_weight + 0.0001f && w < high_weight) {
+        for (float w = low_weight; w <= high_weight + 0.0001f; w += increment) {
+            if (w + increment > high_weight + 0.0001f && w < high_weight) {
                 w = high_weight;
             }
             if (!user_printed && user_weight > prev && user_weight < w) {
@@ -137,11 +139,11 @@ public class BMI_CSC215_English_WilliamLu {
                 String user_bmi_string = bmi_format.format(user_bmi);
                 String user_status = bmi_classification(user_bmi);
                 String user_marker = " (THIS)";
-                int len = user_status.length() + user_marker.length();
-                String status_formatted = (len < status_cell_width)
-                        ? user_status + String.format("%" + (status_cell_width - len) + "s", "") + user_marker
+                int length = user_status.length() + user_marker.length();
+                String status_formatted = (length < status_cell_width)
+                        ? user_status + String.format("%" + (status_cell_width - length) + "s", "") + user_marker
                         : user_status + user_marker;
-                System.out.printf("| %-10.2f | %-10s | %-20s |\n", user_weight, user_bmi_string, status_formatted);
+                System.out.printf("| %-10.2f | %-10s | %-22s |\n", user_weight, user_bmi_string, status_formatted);
                 user_printed = true;
             }
             double localBmi = (w * 703.0) / (total_height * total_height);
@@ -149,25 +151,27 @@ public class BMI_CSC215_English_WilliamLu {
             String base_status = bmi_classification(localBmi);
             String marker = "";
             if (first_row) {
-                marker = " (LOW)";
+                marker = YELLOW_BACKGROUND_BLACK_TEXT + "(LOW)" + TEXT_RESET;
                 first_row = false;
             }
             if (Math.abs(w - high_weight) < 0.001f) {
-                marker = " (HIGH)";
+                marker = YELLOW_BACKGROUND_BLACK_TEXT + "(HIGH)" + TEXT_RESET;
             }
             if (Math.abs(w - user_weight) < 0.001f) {
                 marker += " (THIS)";
                 user_printed = true;
             }
-            int total_length = base_status.length() + marker.length();
+            String marker_no_ansi = marker.replaceAll("\u001B\\[[;\\d]*m", "");
+            int total_length = base_status.length() + marker_no_ansi.length();
+
             String status_formatted = (total_length < status_cell_width)
                     ? base_status + String.format("%" + (status_cell_width - total_length) + "s", "") + marker
                     : base_status + marker;
-            System.out.printf("| %-10.2f | %-10s | %-20s |\n", w, bmi_string, status_formatted);
+            System.out.printf("| %-10.2f | %-10s | %-22s |\n", w, bmi_string, status_formatted);
 
             prev = w;
         }
-        System.out.println("--------------------------------------------------");
+        System.out.println("----------------------------------------------------");
     }
 
     //ROUNDING CALCULATION//
@@ -195,7 +199,7 @@ public class BMI_CSC215_English_WilliamLu {
         System.out.println("\n-----------------------------------------------------------------------------------------------");
         System.out.println("-- Thank you for using my program, "+ name +"!");
         System.out.println("-- Ear-esistible!!!");
-        System.out.println("-------------------------------------------------------------------------------------------- ---");
+        System.out.println("-------------------------------------------------------------------------------------------------");
     }
 }
 
