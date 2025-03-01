@@ -1,7 +1,6 @@
 import java.util.Scanner;
 
 public class BMI_Master_WilliamLu {
-    // 1 statement in main: call runMaster()
     public static void main(String[] args) {
         runMaster();
     }
@@ -11,38 +10,29 @@ public class BMI_Master_WilliamLu {
         String choice = "";
 
         while (true) {
-            // Show menu
             System.out.println("My CSC 215 BMI Calculator Projects:");
             System.out.println("1. BMI, English");
             System.out.println("2. BMI, Metric");
             System.out.println();
             System.out.println("[ USER MANUAL ] Enter an exclamation mark ! to end.");
             System.out.print("Please enter the version you want to try: ");
-
             choice = input.nextLine().trim();
             String choiceLower = choice.toLowerCase();
-
-            // Check for exit
             if (choice.equals("!")) {
                 System.out.println("\nProgram ended. Thank you!");
                 break;
             }
-            // Check if user typed something containing "english"
-            else if (choiceLower.contains("english")) {
-                // Call the English version
-                System.out.println(); // optional blank line
+            else if (choiceLower.contains("en")) {
+                System.out.println();
                 BMI_CSC215_English_WilliamLu.main(null);
-                System.out.println(); // optional blank line
+                System.out.println();
             }
-            // Check if user typed something containing "metric"
-            else if (choiceLower.contains("metric")) {
-                // Call the Metric version
+            else if (choiceLower.contains("me")) {
                 System.out.println();
                 BMI_CSC215_Metric_WilliamLu.main(null);
                 System.out.println();
             }
             else {
-                // Unrecognized version
                 System.out.println("\nUnrecognized version. Please try again!\n");
             }
         }

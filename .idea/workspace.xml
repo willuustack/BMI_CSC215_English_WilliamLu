@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2efad6b3-f4f6-4871-85a7-8a217638e39a" name="Changes" comment="update 2/18">
-      <change afterPath="$PROJECT_DIR$/src/BMI_CSC215_Metric_WilliamLu.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/BMI_Master_WilliamLu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BMI_Calculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BMI_CSC215_English_WilliamLu.java" afterDir="false" />
+    <list default="true" id="2efad6b3-f4f6-4871-85a7-8a217638e39a" name="Changes" comment="update 2/28">
+      <change beforePath="$PROJECT_DIR$/src/BMI_Master_WilliamLu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BMI_Master_WilliamLu.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +89,7 @@
       <workItem from="1740717902201" duration="60000" />
       <workItem from="1740719172574" duration="982000" />
       <workItem from="1740720175713" duration="19552000" />
-      <workItem from="1740806896042" duration="1514000" />
+      <workItem from="1740806896042" duration="2003000" />
     </task>
     <task id="LOCAL-00001" summary="v1">
       <option name="closed" value="true" />
@@ -126,7 +123,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739916325376</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="update 2/28">
+      <option name="closed" value="true" />
+      <created>1740808461050</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1740808461050</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -137,7 +142,8 @@
     <MESSAGE value="updated bmi and rounded bmi" />
     <MESSAGE value="split up main functionalities" />
     <MESSAGE value="update 2/18" />
-    <option name="LAST_COMMIT_MESSAGE" value="update 2/18" />
+    <MESSAGE value="update 2/28" />
+    <option name="LAST_COMMIT_MESSAGE" value="update 2/28" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
