@@ -122,7 +122,7 @@ public class BMI_CSC215_Metric_WilliamLu {
         System.out.printf("| %-10s | %-10s | %-22s |\n", "WEIGHT", "BMI", "WEIGHT STATUS");
         System.out.println("----------------------------------------------------");
         DecimalFormat bmi_format = new DecimalFormat("#.#####");
-        float increment = 5.00f;
+        float increment = 2.50f;
         int status_cell_width = 22;
         boolean first_row = true;
         boolean user_printed = false;
