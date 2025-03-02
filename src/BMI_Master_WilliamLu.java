@@ -2,24 +2,24 @@ import java.util.Scanner;
 
 public class BMI_Master_WilliamLu {
     public static void main(String[] args) {
-        runMaster();
+        run_master();
     }
 
-    public static void runMaster() {
+    public static void run_master() {
         Scanner input = new Scanner(System.in);
         String choice = "";
 
         while (true) {
             System.out.println("My CSC 215 BMI Calculator Projects:");
-            System.out.println("1. BMI, English");
-            System.out.println("2. BMI, Metric");
+            System.out.println("    1. BMI, English");
+            System.out.println("    2. BMI, Metric");
             System.out.println();
             System.out.println("[ USER MANUAL ] Enter an exclamation mark ! to end.");
             System.out.print("Please enter the version you want to try: ");
             choice = input.nextLine().trim();
             String choiceLower = choice.toLowerCase();
             if (choice.equals("!")) {
-                System.out.println("\nProgram ended. Thank you!");
+                System.out.println("\nProgram ended");
                 break;
             }
             else if (choiceLower.contains("en")) {
