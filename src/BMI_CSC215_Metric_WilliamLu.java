@@ -16,16 +16,16 @@ public class BMI_CSC215_Metric_WilliamLu {
     static float user_weight;
 
     public static void main(String[] args) {
-        intro();
-        questionnaire_one();
-        summary();
-        questionnaire_two();
-        range_table();
-        outro();
+        print_intro();
+        print_questionnaire_one();
+        print_summary();
+        print_questionnaire_two();
+        print_range_table();
+        print_outro();
     }
 
     // INTRO TEXT//
-    public static void intro() {
+    public static void print_intro() {
         System.out.println("-----------------------------------------------------------------------------------------------");
         System.out.println("-- Welcome to:");
         System.out.println("--            BODY MASS INDEX (BMI) Computation, CSC 215, Metric version");
@@ -34,7 +34,7 @@ public class BMI_CSC215_Metric_WilliamLu {
     }
 
     // USER QUESTIONS 01 //
-    public static void questionnaire_one() {
+    public static void print_questionnaire_one() {
         Scanner input = new Scanner(System.in);
         System.out.print("Please enter your full name: ");
         name = input.nextLine();
@@ -64,12 +64,12 @@ public class BMI_CSC215_Metric_WilliamLu {
                 input.next();
             }
         }
-        bmi = bmi_calculator(height_cm, weight);
+        bmi = bmi_calculation(height_cm, weight);
         bmi_rounded = bmi_rounding(bmi);
     }
 
     // SUMMARY TEXT //
-    public static void summary () {
+    public static void print_summary () {
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM dd, yyyy 'at' hh:mm:ss a");
         String dateTime = now.format(formatter);
@@ -82,7 +82,7 @@ public class BMI_CSC215_Metric_WilliamLu {
     }
 
     // USER QUESTIONS 02 //
-    public static void questionnaire_two() {
+    public static void print_questionnaire_two() {
         Scanner input = new Scanner(System.in);
         boolean valid_low_weight = false;
         while (!valid_low_weight) {
@@ -109,95 +109,10 @@ public class BMI_CSC215_Metric_WilliamLu {
     }
 
     // BMI CALCULATION (Metric): BMI = (weight (kg) * 10000) / (height_cm²)
-    public static float bmi_calculator(int height_cm, float weight) {
+    public static float bmi_calculation(int height_cm, float weight) {
         bmi = (weight * 10000.0f) / (height_cm * height_cm);
         return bmi;
     }
-
-    // RANGE TABLE //
-    public static void range_table() {
-        
-        // for yellow highlighting 
-        String YELLOW_BACKGROUND_BLACK_TEXT = "\u001B[48;5;11m\u001B[30m";
-        String TEXT_RESET = "\u001b[0m";
-        //
-
-        //for table header
-        System.out.println("----------------------------------------------------");
-        System.out.printf("| %-10s | %-10s | %-22s |\n", "WEIGHT", "BMI", "WEIGHT STATUS");
-        System.out.println("----------------------------------------------------");
-        //
-        
-        //
-        DecimalFormat bmi_format = new DecimalFormat("#.#####"); //formats BMI to up to 5 decimals
-        float increment = 2.50f;  //how much to increment from starting weight
-        int status_cell_width = 22;  //width of 'weight' column
-        boolean first_row = true;  //to see if (low) should be printed
-        boolean user_printed = false;  //if (this) is printed on user's weight on table
-        float prev = low_weight;  //remembers the last weight printed, to detect whether or not the user's weight would fit in between two of the rows 
-        //
-        
-        //main loop
-        for (float w = low_weight; w <= high_weight + 0.0001f; w += increment) {  //start at 'low_weight' and goes up by increment untill it reaches 'high_weight'
-            if (w + increment > high_weight + 0.0001f && w < high_weight) {  //if the weight (w) + the 'increment' exceeds the user's high weight 
-                w = high_weight;  //sets the weight (w) to the high weight.
-            }
-        //
-            
-
-            //if statement to insert the users weight/bmi/status inbetween rows
-            if (!user_printed && user_weight > prev && user_weight < w) {  //if user_printed has not been printed AND the user's weight is between the weight of the previous row and current row in the loop
-                double user_bmi = (user_weight * 10000.0) / (height_cm * height_cm); //calculates the user's bmi
-                String user_bmi_string = bmi_format.format(user_bmi); //formats the bmi using the DecimalFormat bmi_format from above
-                String user_status = bmi_classification(user_bmi);  //calls the bmi_classification method to see where the bmi status falls
-                String user_marker = " (THIS)";  //defines the text taht will be append to the user's row
-                int length = user_status.length() + user_marker.length();  //to calculate the total number of characters in the user_status + (this) so that the table can be formatted properly
-                String status_formatted = (length < status_cell_width)  //if the combined text is shorted than the int status_cell_width (from above) adds extra spaces to format properly
-                        ? user_status + String.format("%" + (status_cell_width - length) + "s", "") + user_marker
-                        : user_status + user_marker;
-                System.out.printf("| %-10.2f | %-10s | %-22s |\n", user_weight, user_bmi_string, status_formatted); //prints the user's weight, bmi, and status row. Formatted properly
-                user_printed = true; //sets the boolean to true so that this if statment closes and won't print the user's row again
-            }
-            //
-
-            //
-            double local_bmi = (w * 10000.0) / (height_cm * height_cm);  //calculates bmi for the current incremented weight
-            String bmi_string = bmi_format.format(local_bmi);  //formats it 
-            String base_status = bmi_classification(local_bmi);  //calls thge bmi_classification method to see where the bmi status falls
-            String marker = "";  //prepares a string for whenever you need to print (low)/(high), the marker is always there 
-            //
-
-            //
-            if (first_row) {  //if the weight is the very first iteration of the loop set  
-                marker = YELLOW_BACKGROUND_BLACK_TEXT + "(LOW)" + TEXT_RESET;  //String marker (from above) = "(LOW)"
-                first_row = false;  //sets boolean to false so that this if statment closes and will not print "(LOW)" again
-            }
-            if (Math.abs(w - high_weight) < 0.001f) { //if the absolute value of (weight (w) - high_weight) is less than 0.001
-                marker = YELLOW_BACKGROUND_BLACK_TEXT + "(HIGH)" + TEXT_RESET; //sets the String marker = "(HIGH)"
-            }
-            if (Math.abs(w - user_weight) < 0.001f) {  //if the current weight matches the user's weight
-                marker += " (THIS)";  //sets marker to "(THIS)"
-                user_printed = true;  //closes if statement so that it will not print "(THIS)" again
-            }
-            //
-            
-            String marker_no_ansi = marker.replaceAll("\u001B\\[[;\\d]*m", "");  //removes ANSI escape codes (color) from marker to be able to determine character length of text
-            int total_length = base_status.length() + marker_no_ansi.length();  //finds out how many visable characters are in status + marker
-            String status_formatted = (total_length < status_cell_width)  //if status + marker < status_cell_width = 22 then it will add extra spaces to align appends to the right
-                    ? base_status + String.format("%" + (status_cell_width - total_length) + "s", "") + marker
-                    : base_status + marker;
-            
-            System.out.printf("| %-10.2f | %-10s | %-22s |\n", w, bmi_string, status_formatted);  //prints the current iteration of the row
-            prev = w;  //stores cuurent weight as the previous weight (see line 143)
-        }
-        System.out.println("----------------------------------------------------");
-    }
-
-    // ROUNDING CALCULATION //
-    public static double bmi_rounding(float bmi) {
-        return bmi_rounded = Math.round(bmi * 10.0) / 10.0;
-    }
-
     // CLASSIFIES BMI
     public static String bmi_classification(double bmi) {
         if (bmi < 18.5) {
@@ -212,8 +127,94 @@ public class BMI_CSC215_Metric_WilliamLu {
         return classification;
     }
 
+    // BMI FORMATTING //
+    public static String format_BMI(double bmi) {
+        String currentClassification = bmi_classification(bmi);
+        DecimalFormat df;
+        if (currentClassification.equals("Underweight")) {
+            df = new DecimalFormat("#.##");       // 2 decimal places
+        } else if (currentClassification.equals("Healthy Weight")) {
+            df = new DecimalFormat("#.###");      // 3 decimal places
+        } else if (currentClassification.equals("Overweight")) {
+            df = new DecimalFormat("#.####");     // 4 decimal places
+        } else { // Obesity
+            df = new DecimalFormat("#.#####");    // 5 decimal places
+        }
+        return df.format(bmi);
+    }
+
+    // RANGE TABLE //
+    public static void print_range_table() {
+
+        // for yellow highlight
+        String YELLOW_BACKGROUND_BLACK_TEXT = "\u001B[48;5;11m\u001B[30m";
+        String TEXT_RESET = "\u001b[0m";
+        //
+
+        //header of table
+        System.out.println("----------------------------------------------------");
+        System.out.printf("| %-10s | %-10s | %-22s |\n", "WEIGHT", "BMI", "WEIGHT STATUS");
+        System.out.println("----------------------------------------------------");
+        DecimalFormat bmi_format = new DecimalFormat("#.#####");
+        //
+
+        float increment = 2.5f; //increment of each row
+        int status_cell_width = 22; //sets 'weight column' width
+        boolean first_row = true; //for printing '(low)' on table's first row
+        boolean user_printed = false; //for printing '(this)' on users weight on table
+        float prev = low_weight; //remembers last weight printed, used to detect if user's weight can fit inbetween
+
+        for (float w = low_weight; w <= high_weight + 0.0001f; w += increment) {
+            if (w + increment > high_weight + 0.0001f && w < high_weight) {
+                w = high_weight;
+            }
+            if (!user_printed && user_weight > prev && user_weight < w) {
+                double user_bmi = (user_weight * 10000.0) / (height_cm * height_cm);
+                String user_bmi_string = format_BMI(user_bmi);
+                String user_status = bmi_classification(user_bmi);
+                String user_marker = " (THIS)";
+                int length = user_status.length() + user_marker.length();
+                String status_formatted = (length < status_cell_width)
+                        ? user_status + String.format("%" + (status_cell_width - length) + "s", "") + user_marker
+                        : user_status + user_marker;
+                System.out.printf("| %-10.2f | %-10s | %-22s |\n", user_weight, user_bmi_string, status_formatted);
+                user_printed = true;
+            }
+            double local_bmi = (w * 10000.0) / (height_cm * height_cm);
+            String bmi_string = format_BMI(local_bmi);
+            String base_status = bmi_classification(local_bmi);
+            String marker = "";
+            if (first_row) {
+                marker = YELLOW_BACKGROUND_BLACK_TEXT + "(LOW)" + TEXT_RESET;
+                first_row = false;
+            }
+            if (Math.abs(w - high_weight) < 0.001f) {
+                marker = YELLOW_BACKGROUND_BLACK_TEXT + "(HIGH)" + TEXT_RESET;
+            }
+            if (Math.abs(w - user_weight) < 0.001f) {
+                marker += " (THIS)";
+                user_printed = true;
+            }
+            String marker_no_ansi = marker.replaceAll("\u001B\\[[;\\d]*m", "");
+            int total_length = base_status.length() + marker_no_ansi.length();
+            String status_formatted = (total_length < status_cell_width)
+                    ? base_status + String.format("%" + (status_cell_width - total_length) + "s", "") + marker
+                    : base_status + marker;
+            System.out.printf("| %-10.2f | %-10s | %-22s |\n", w, bmi_string, status_formatted);
+            prev = w;
+        }
+        System.out.println("----------------------------------------------------");
+    }
+
+    // ROUNDING CALCULATION //
+    public static double bmi_rounding(float bmi) {
+        return bmi_rounded = Math.round(bmi * 10.0) / 10.0;
+    }
+
+
+
     // OUTRO TEXT //
-    public static void outro() {
+    public static void print_outro() {
         System.out.println("\nThe SFSU Mashouf Wellness Center is at 755 Font Blvd.");
         System.out.println("\n----------------------------------------------------------------------------------------------");
         System.out.println("-- Thank you for using my program, " + name + "!");
