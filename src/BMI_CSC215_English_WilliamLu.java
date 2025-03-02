@@ -19,16 +19,16 @@ public class BMI_CSC215_English_WilliamLu {
     static float user_weight;
 
     public static void main(String[] args) {
-        intro();
-        questionnaire_one();
-        summary();
-        questionnaire_two();
-        range_table();
-        outro();
+        print_intro();
+        print_questionnaire_one();
+        print_summary();
+        print_questionnaire_two();
+        print_range_table();
+        print_outro();
     }
 
     //INTRO TEXT//
-    public static void intro() {
+    public static void print_intro() {
         System.out.println("-----------------------------------------------------------------------------------------------");
         System.out.println("-- Welcome to:");
         System.out.println("--            BODY MASS INDEX (BMI) Computation, CSC 215, English version");
@@ -37,7 +37,7 @@ public class BMI_CSC215_English_WilliamLu {
     }
 
     //USER QUESTIONS 01
-    public static void questionnaire_one() {
+    public static void print_questionnaire_one() {
         Scanner input = new Scanner(System.in);
         System.out.print("Please enter your full name: ");
         name = input.nextLine();
@@ -66,12 +66,12 @@ public class BMI_CSC215_English_WilliamLu {
                 input.next();
             }
         }
-        bmi = bmi_calculator(height_feet, height_inches, weight);
+        bmi = bmi_calculation(height_feet, height_inches, weight);
         bmi_rounded = bmi_rounding(bmi);
     }
 
     //SUMMARY TEXT//
-    public static void summary () {
+    public static void print_summary () {
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM dd, yyyy 'at' hh:mm:ss a");
         String dateTime = now.format(formatter);
@@ -84,7 +84,7 @@ public class BMI_CSC215_English_WilliamLu {
     }
 
     //USER QUESTION 02
-    public static void questionnaire_two() {
+    public static void print_questionnaire_two() {
         Scanner input = new Scanner(System.in);
         boolean valid_low_weight = false;
         while (!valid_low_weight) {
@@ -110,15 +110,45 @@ public class BMI_CSC215_English_WilliamLu {
     }
 
     //BMI CALCULATION//
-    public static float bmi_calculator(int height_feet, int height_inches, float weight) {
+    public static float bmi_calculation(int height_feet, int height_inches, float weight) {
         int total_height_inches = (height_feet * 12) + height_inches;
         total_height = total_height_inches;
         bmi = (weight * 703.0f) / (total_height_inches * total_height_inches);
         return bmi;
     }
 
+    //CLASSIFIES BMI//
+    public static String bmi_classification(double bmi_rounded) {
+        if (bmi_rounded <= 18.5) {
+            classification = "Underweight";
+        } else if (bmi_rounded <= 24.9) {
+            classification = "Healthy Weight";
+        } else if (bmi_rounded <= 29.9) {
+            classification = "Overweight";
+        }else {
+            classification = "Obesity";
+        }
+        return classification;
+    }
+
+    // BMI FORMATTING //
+    public static String format_BMI(double bmi) {
+        String currentClassification = bmi_classification(bmi);
+        DecimalFormat df;
+        if (currentClassification.equals("Underweight")) {
+            df = new DecimalFormat("#.##");       // 2 decimal places
+        } else if (currentClassification.equals("Healthy Weight")) {
+            df = new DecimalFormat("#.###");      // 3 decimal places
+        } else if (currentClassification.equals("Overweight")) {
+            df = new DecimalFormat("#.####");     // 4 decimal places
+        } else { // Obesity
+            df = new DecimalFormat("#.#####");    // 5 decimal places
+        }
+        return df.format(bmi);
+    }
+
     //RANGE TABLE//
-    public static void range_table() {
+    public static void print_range_table() {
         String YELLOW_BACKGROUND_BLACK_TEXT = "\u001B[48;5;11m\u001B[30m";
         String TEXT_RESET = "\u001b[0m";
         System.out.println("----------------------------------------------------");
@@ -136,7 +166,7 @@ public class BMI_CSC215_English_WilliamLu {
             }
             if (!user_printed && user_weight > prev && user_weight < w) {
                 double user_bmi = (user_weight * 703.0) / (total_height * total_height);
-                String user_bmi_string = bmi_format.format(user_bmi);
+                String user_bmi_string = format_BMI(user_bmi);
                 String user_status = bmi_classification(user_bmi);
                 String user_marker = " (THIS)";
                 int length = user_status.length() + user_marker.length();
@@ -147,7 +177,7 @@ public class BMI_CSC215_English_WilliamLu {
                 user_printed = true;
             }
             double localBmi = (w * 703.0) / (total_height * total_height);
-            String bmi_string = bmi_format.format(localBmi);
+            String bmi_string = format_BMI(localBmi);
             String base_status = bmi_classification(localBmi);
             String marker = "";
             if (first_row) {
@@ -158,7 +188,7 @@ public class BMI_CSC215_English_WilliamLu {
                 marker = YELLOW_BACKGROUND_BLACK_TEXT + "(HIGH)" + TEXT_RESET;
             }
             if (Math.abs(w - user_weight) < 0.001f) {
-                marker += " (THIS)";
+                marker += " (this)";
                 user_printed = true;
             }
             String marker_no_ansi = marker.replaceAll("\u001B\\[[;\\d]*m", "");
@@ -179,22 +209,9 @@ public class BMI_CSC215_English_WilliamLu {
         return bmi_rounded = Math.round(bmi * 10.0) / 10.0;
     }
 
-    //CLASSIFIES BMI//
-    public static String bmi_classification(double bmi_rounded) {
-        if (bmi_rounded <= 18.5) {
-            classification = "Underweight";
-        } else if (bmi_rounded <= 24.9) {
-            classification = "Healthy Weight";
-        } else if (bmi_rounded <= 29.9) {
-            classification = "Overweight";
-        }else {
-            classification = "Obesity";
-        }
-        return classification;
-    }
 
     //OUTRO TEXT//
-    public static void outro() {
+    public static void print_outro() {
         System.out.println("\nThe SFSU Mashouf Wellness Center is at 755 Font Blvd.");
         System.out.println("\n-----------------------------------------------------------------------------------------------");
         System.out.println("-- Thank you for using my program, "+ name +"!");
